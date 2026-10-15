@@ -164,7 +164,7 @@ export function Landing() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            SwiftDrop sends images, videos, audio and any file between your
+            Drop Whisk sends images, videos, audio and any file between your
             phone, laptop, Android and iPhone. No accounts, no cables — just a
             room code or a QR scan.
           </p>

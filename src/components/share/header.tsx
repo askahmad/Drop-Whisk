@@ -38,7 +38,7 @@ export function Header() {
           </div>
           <div className="flex flex-col leading-tight">
             <span className="text-base font-bold tracking-tight">
-              Swift<span className="text-primary">Drop</span>
+              Drop<span className="text-primary">Whisk</span>
             </span>
             <span className="hidden text-[11px] text-muted-foreground sm:block">
               Cross-device file sharing

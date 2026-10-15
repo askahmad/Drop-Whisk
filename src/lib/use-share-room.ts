@@ -19,9 +19,24 @@ export function getSocket(): Socket | null {
   return socket
 }
 
+function getSocketUrl(): string {
+  if (process.env.NEXT_PUBLIC_SOCKET_URL) {
+    return process.env.NEXT_PUBLIC_SOCKET_URL
+  }
+  if (typeof window !== 'undefined') {
+    // If running behind Caddy gateway on port 81 (query transform proxy)
+    if (window.location.port === '81') {
+      return '/?XTransformPort=3003'
+    }
+    // Direct local / LAN dev access (e.g. phone on same WiFi)
+    return `${window.location.protocol}//${window.location.hostname}:3003`
+  }
+  return 'http://localhost:3003'
+}
+
 function ensureSocket(roomCode: string): Socket {
   if (socket) return socket
-  socket = io('/?XTransformPort=3003', {
+  socket = io(getSocketUrl(), {
     transports: ['websocket', 'polling'],
     reconnection: true,
     reconnectionAttempts: 8,
@@ -39,8 +54,7 @@ function teardownSocket() {
 }
 
 /**
- * Connects to the SwiftDrop mini-service (Socket.io on port 3003, forwarded
- * through the gateway via ?XTransformPort=3003) whenever a room is active,
+ * Connects to the Drop Whisk mini-service (Socket.io on port 3003) whenever a room is active,
  * and wires all incoming events into the zustand store.
  *
  * Should be mounted exactly once, high in the tree (page level).

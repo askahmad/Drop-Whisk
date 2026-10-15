@@ -52,7 +52,7 @@ export async function GET(
     headers.set("Content-Type", "application/zip");
     headers.set(
       "Content-Disposition",
-      `attachment; filename="swiftdrop-${room.code}.zip"`,
+      `attachment; filename="dropwhisk-${room.code}.zip"`,
     );
     headers.set("Cache-Control", "no-store");
 

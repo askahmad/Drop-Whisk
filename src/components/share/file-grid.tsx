@@ -47,7 +47,7 @@ export function FileGrid() {
           <span className="tabular-nums">{formatBytes(totalSize)}</span>
         </p>
         {room && (
-          <a href={roomZipUrl(room.code)} download={`swiftdrop-${room.code}.zip`}>
+          <a href={roomZipUrl(room.code)} download={`dropwhisk-${room.code}.zip`}>
             <Button variant="outline" size="sm">
               <FolderOpen className="h-4 w-4" />
               Download all (.zip)

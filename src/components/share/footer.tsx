@@ -11,7 +11,7 @@ export function Footer() {
             <Zap className="h-3.5 w-3.5" strokeWidth={2.5} />
           </span>
           <span>
-            <span className="font-semibold text-foreground">SwiftDrop</span>{' '}
+            <span className="font-semibold text-foreground">Drop Whisk</span>{' '}
             — share anything, anywhere.
           </span>
         </div>
@@ -21,7 +21,7 @@ export function Footer() {
             No sign-up · Files auto-expire in 24h
           </span>
           <a
-            href="https://github.com"
+            href="https://github.com/askahmad/Drop-Whisk"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 rounded-md px-1.5 py-1 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"

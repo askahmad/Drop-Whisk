@@ -15,25 +15,27 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SwiftDrop — Share files across any device, instantly",
+  title: "Drop Whisk — Share files across any device, instantly",
   description:
-    "SwiftDrop lets you share images, videos, audio and any file between mobile, PC, Android and iPhone in seconds. No login, no limits — just a room code or a QR scan.",
+    "Drop Whisk lets you share images, videos, audio and any file between mobile, PC, Android and iPhone in seconds. No login, no limits — just a room code or a QR scan.",
   keywords: [
+    "drop whisk",
+    "dropwhisk",
     "file sharing",
     "share files",
-    "airdrop",
+    "airdrop alternative",
     "qr share",
     "cross-device transfer",
     "mobile to pc",
     "send video",
     "send images",
   ],
-  authors: [{ name: "SwiftDrop" }],
+  authors: [{ name: "Drop Whisk" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/favicon.svg",
   },
   openGraph: {
-    title: "SwiftDrop — Share files across any device, instantly",
+    title: "Drop Whisk — Share files across any device, instantly",
     description:
       "Share images, videos, audio and any file between mobile, PC, Android and iPhone in seconds.",
     type: "website",

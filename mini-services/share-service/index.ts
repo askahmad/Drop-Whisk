@@ -1,4 +1,4 @@
-// SwiftDrop real-time mini-service (Socket.io) — runs on port 3003.
+// Drop Whisk real-time mini-service (Socket.io) — runs on port 3003.
 //
 // Mirrors the example at examples/websocket/server.ts:
 //   - path: '/'  (Caddy uses this to route via XTransformPort=3003)

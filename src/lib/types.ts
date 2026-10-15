@@ -1,4 +1,4 @@
-// Shared types for the SwiftDrop file-sharing app.
+// Shared types for the Drop Whisk file-sharing app.
 // These types are the single source of truth for the API contract
 // and the real-time socket protocol between Next.js and the mini-service.
 

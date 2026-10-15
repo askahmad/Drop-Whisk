@@ -152,7 +152,7 @@ export const useShareStore = create<ShareState>()(
         }),
     }),
     {
-      name: 'swiftdrop-store',
+      name: 'dropwhisk-store',
       // Persist only the friendly device name across reloads (everything else is session-scoped)
       partialize: (state) => ({ deviceName: state.deviceName }),
     },
