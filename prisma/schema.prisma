@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  files    File[]
+  texts    TextSnippet[]
+  devices  Device[]
+
+  @@index([code])
+}
+
+model File {
+  id            String   @id @default(cuid())
+  roomId        String
+  room          Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  name          String   // stored filename on disk (cuid-based, unique)
+  originalName  String   // original filename from uploader
+  size          Int
+  mimeType      String
+  kind          String   // image | video | audio | document | archive | other
+  deviceName    String?
+  createdAt     DateTime @default(now())
+
+  @@index([roomId])
+}
+
+model TextSnippet {
+  id         String   @id @default(cuid())
+  roomId     String
+  room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  content    String
+  deviceName String?
+  createdAt  DateTime @default(now())
+
+  @@index([roomId])
+}
+
+model Device {
+  id         String   @id @default(cuid())
+  roomId     String
+  room       Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  name       String
+  socketId   String?
+  lastSeen   DateTime @default(now())
+
+  @@index([roomId])
+}
