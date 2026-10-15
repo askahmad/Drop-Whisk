@@ -80,13 +80,17 @@ export function generateRoomCode(length = 6): string {
   return out
 }
 
-/** Pick a friendly device name with a random adjective + noun suffix. */
+/** Pick a friendly device name based on platform, e.g. "Windows PC", "Android Phone", "iPhone". */
 export function generateDeviceName(): string {
-  const adjectives = ["Swift", "Quick", "Bright", "Bold", "Calm", "Eager", "Fast", "Golden", "Happy", "Lucky"]
-  const nouns = ["Falcon", "Tiger", "Comet", "Rocket", "Panda", "Wolf", "Dolphin", "Eagle", "Fox", "Hawk"]
-  const a = adjectives[Math.floor(Math.random() * adjectives.length)]
-  const n = nouns[Math.floor(Math.random() * nouns.length)]
-  return `${a}${n}`
+  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
+    const platform = detectPlatform(navigator.userAgent)
+    if (platform === "Windows") return "Windows PC"
+    if (platform === "macOS") return "Mac"
+    if (platform === "iOS") return "iPhone"
+    if (platform === "Android") return "Android Phone"
+    if (platform === "Linux") return "Linux PC"
+  }
+  return "My Device"
 }
 
 /** Detect the upload device's OS/platform from the user-agent. */

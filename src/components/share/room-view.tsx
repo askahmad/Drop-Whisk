@@ -36,18 +36,22 @@ export function RoomView() {
   const setFiles = useShareStore((s) => s.setFiles)
   const setTexts = useShareStore((s) => s.setTexts)
   const devices = useShareStore((s) => s.devices)
+  const selfDeviceId = useShareStore((s) => s.selfDeviceId)
   const files = useShareStore((s) => s.files)
   const texts = useShareStore((s) => s.texts)
   const reset = useShareStore((s) => s.reset)
+
+  const otherDevicesCount = devices.filter((d) => d.id !== selfDeviceId).length
 
   const [qrOpen, setQrOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [tab, setTab] = useState('files')
   const [refreshing, setRefreshing] = useState(false)
 
-  // Ensure we have a friendly device name.
+  // Ensure we have a friendly device name (auto-upgrade any legacy animal names).
   useEffect(() => {
-    if (!deviceName) setDeviceName(generateDeviceName())
+    const isLegacy = /^(Swift|Quick|Bright|Bold|Calm|Eager|Fast|Golden|Happy|Lucky)(Falcon|Tiger|Comet|Rocket|Panda|Wolf|Dolphin|Eagle|Fox|Hawk)$/.test(deviceName)
+    if (!deviceName || isLegacy) setDeviceName(generateDeviceName())
   }, [deviceName, setDeviceName])
 
   // Load initial room data (files + texts).
@@ -134,7 +138,9 @@ export function RoomView() {
               </span>
               <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                 <span className="presence-dot h-1.5 w-1.5 rounded-full bg-emerald-500 text-emerald-500" />
-                {devices.length} online · expires in 24h
+                {otherDevicesCount === 0
+                  ? 'Waiting for devices'
+                  : `${devices.length} online`} · expires in 24h
               </span>
             </div>
 
@@ -238,9 +244,9 @@ export function RoomView() {
           >
             <Users className="h-4 w-4" />
             Devices
-            {devices.length > 0 && (
+            {otherDevicesCount > 0 && (
               <span className="ml-1 rounded-full bg-primary/15 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary group-data-[state=active]:bg-primary-foreground/20 group-data-[state=active]:text-primary-foreground">
-                {devices.length}
+                {otherDevicesCount}
               </span>
             )}
           </TabsTrigger>

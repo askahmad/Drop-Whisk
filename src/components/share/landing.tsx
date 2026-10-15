@@ -15,57 +15,23 @@ import {
   Zap,
   ShieldCheck,
   Wifi,
+  QrCode,
+  UploadCloud,
+  Download,
+  HelpCircle,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { useShareStore } from '@/lib/store'
 import { createRoomApi, getRoomApi, registerDeviceApi } from '@/lib/api'
 import { generateDeviceName } from '@/lib/file-utils'
 import { toast } from 'sonner'
-
-/* --- Hero illustration: two devices with animated dots traveling between --- */
-function TransferIllustration() {
-  const dots = [0, 1, 2]
-  return (
-    <div
-      className="relative mx-auto mt-10 flex max-w-md items-center justify-between gap-6"
-      aria-hidden
-    >
-      {/* Left device: laptop */}
-      <motion.div
-        initial={{ opacity: 0, x: -12 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-border/70 bg-card shadow-sm"
-      >
-        <Monitor className="h-6 w-6 text-foreground" strokeWidth={2} />
-      </motion.div>
-
-      {/* The connecting line + traveling dots */}
-      <div className="relative h-px flex-1 bg-gradient-to-r from-primary/30 via-primary/60 to-primary/30">
-        {/* A faint wider track behind it for depth */}
-        <div className="absolute -inset-y-1 -inset-x-0 bg-primary/5 blur-sm" />
-        {dots.map((i) => (
-          <span
-            key={i}
-            className="dot-travel absolute -top-1 h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_2px] shadow-primary/40"
-            style={{ animationDelay: `${i * 0.8}s`, left: 0 }}
-          />
-        ))}
-      </div>
-
-      {/* Right device: phone */}
-      <motion.div
-        initial={{ opacity: 0, x: 12 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-border/70 bg-card shadow-sm"
-      >
-        <Smartphone className="h-6 w-6 text-foreground" strokeWidth={2} />
-      </motion.div>
-    </div>
-  )
-}
 
 export function Landing() {
   const setRoom = useShareStore((s) => s.setRoom)
@@ -79,7 +45,9 @@ export function Landing() {
   const handleCreate = async () => {
     setBusy('create')
     try {
-      const name = useShareStore.getState().deviceName || generateDeviceName()
+      const stored = useShareStore.getState().deviceName
+      const isLegacy = /^(Swift|Quick|Bright|Bold|Calm|Eager|Fast|Golden|Happy|Lucky)(Falcon|Tiger|Comet|Rocket|Panda|Wolf|Dolphin|Eagle|Fox|Hawk)$/.test(stored)
+      const name = !stored || isLegacy ? generateDeviceName() : stored
       setDeviceName(name)
       setLoading(true)
       const room = await createRoomApi()
@@ -152,9 +120,21 @@ export function Landing() {
           transition={{ duration: 0.5 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
-            <span className="presence-dot h-2 w-2 rounded-full bg-primary text-primary" />
-            No sign-up · Works on any device · 500MB per file
+          <div className="mb-5 inline-flex flex-wrap items-center justify-center gap-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+              <span className="presence-dot h-2 w-2 rounded-full bg-primary text-primary" />
+              No sign-up · Works on any device · 500MB per file
+            </div>
+            <a
+              href="https://connexode.com"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-foreground"
+            >
+              <span>By</span>
+              <span className="font-semibold text-foreground">Muhammad Ahmad</span>
+              <span className="text-primary font-medium">· Founder of Connexode</span>
+            </a>
           </div>
 
           <h1 className="text-balance text-4xl font-extrabold tracking-tight sm:text-6xl">
@@ -188,8 +168,6 @@ export function Landing() {
               </motion.span>
             ))}
           </div>
-
-          <TransferIllustration />
         </motion.div>
 
         {/* Action cards */}
@@ -208,7 +186,7 @@ export function Landing() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
                 <Plus className="h-6 w-6" strokeWidth={2.5} />
               </div>
-              <h3 className="text-lg font-semibold">Create a room</h3>
+              <h2 className="text-lg font-semibold">Create a room</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 Start a new share session and get a code plus a QR for instant
                 pairing with your phone.
@@ -239,7 +217,7 @@ export function Landing() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-secondary-foreground shadow-lg">
                 <KeyRound className="h-6 w-6" strokeWidth={2.5} />
               </div>
-              <h3 className="text-lg font-semibold">Join a room</h3>
+              <h2 className="text-lg font-semibold">Join a room</h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 Have a code? Enter it to join an existing session and start
                 receiving files right away.
@@ -300,7 +278,7 @@ export function Landing() {
               <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                 <Icon className="h-4.5 w-4.5" />
               </div>
-              <h4 className="text-sm font-semibold">{title}</h4>
+              <h3 className="text-sm font-semibold">{title}</h3>
               <p className="mt-0.5 text-xs text-muted-foreground">{desc}</p>
             </motion.div>
           ))}
@@ -320,6 +298,131 @@ export function Landing() {
             <span className="rounded-md border border-border/60 bg-muted px-1.5 py-0.5 font-semibold">Android</span>
           </span>
         </div>
+
+        {/* How It Works Section (SEO & Semantic Structure) */}
+        <section aria-labelledby="how-it-works-heading" className="mx-auto mt-20 max-w-4xl text-center">
+          <h2 id="how-it-works-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">
+            How Drop Whisk Works
+          </h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground sm:text-base">
+            No installation, no Bluetooth configuration, no account creation. Instant file transfer in 3 simple steps.
+          </p>
+
+          <div className="mt-8 grid gap-4 text-left sm:grid-cols-3">
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-colors hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold text-sm">
+                1
+              </div>
+              <h3 className="font-semibold text-foreground">Create or Enter Room</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Start a session on any device to generate a secure 6-character room code and QR link.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-colors hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold text-sm">
+                2
+              </div>
+              <h3 className="font-semibold text-foreground">Connect Instantly</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Scan the QR code from your smartphone camera or type the code on another PC or tablet.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-colors hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary font-bold text-sm">
+                3
+              </div>
+              <h3 className="font-semibold text-foreground">Drop & Download</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Drag-and-drop photos, large videos up to 500MB, or paste text. Download individually or as a single ZIP.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section (Rich Search Result Snippets) */}
+        <section aria-labelledby="faq-heading" className="mx-auto mt-20 max-w-3xl">
+          <div className="text-center">
+            <h2 id="faq-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Frequently Asked Questions
+            </h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Everything you need to know about sharing files across devices with Drop Whisk.
+            </p>
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-border/70 bg-card/60 p-6 backdrop-blur">
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="faq-1">
+                <AccordionTrigger className="text-left font-medium">
+                  How do I transfer files between phone and PC with Drop Whisk?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  Open Drop Whisk on your PC or phone, click &apos;Create room&apos;, and scan the generated QR code or enter the 6-digit code on your other device. Then drag and drop files or copy-paste text to transfer instantly.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-2">
+                <AccordionTrigger className="text-left font-medium">
+                  Is Drop Whisk free to use and do I need to register?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  Drop Whisk is 100% free with zero sign-up, no email registration, and no software installation required. Simply open the website and start sharing.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-3">
+                <AccordionTrigger className="text-left font-medium">
+                  What file types and sizes are supported?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  You can share photos, videos, audio, PDF documents, archives, and raw files up to 500MB per file with high-speed transfer.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-4">
+                <AccordionTrigger className="text-left font-medium">
+                  How long are uploaded files and rooms kept?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  All rooms, uploaded files, and clipboard snippets are temporary and automatically deleted after 24 hours for your privacy and security.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-5">
+                <AccordionTrigger className="text-left font-medium">
+                  Does Drop Whisk work across different operating systems?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  Yes, it works seamlessly across iPhone (iOS), Android, Windows, macOS, Linux, and ChromeOS via any modern web browser like Chrome, Safari, Edge, or Firefox.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-6">
+                <AccordionTrigger className="text-left font-medium">
+                  Who developed Drop Whisk?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  Drop Whisk was developed by{' '}
+                  <strong className="font-semibold text-foreground">
+                    Muhammad Ahmad
+                  </strong>
+                  , Founder of{' '}
+                  <a
+                    href="https://connexode.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    Connexode
+                  </a>
+                  . It was built to make peer-to-peer and cross-device file sharing fast, secure, and accessible from any browser without registrations or cables.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </section>
       </div>
     </section>
   )

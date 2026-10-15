@@ -166,22 +166,26 @@
     mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
   }
   .text-gradient {
+    display: inline-block;
     background: linear-gradient(120deg, var(--brand), oklch(0.6 0.12 184.7));
     -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
   }
   /* Animated gradient text — slow hue sweep for the hero word. */
   .text-gradient-animated {
+    display: inline-block;
     background: linear-gradient(
       120deg,
-      var(--brand) 0%,
-      oklch(0.74 0.15 162.48) 35%,
-      oklch(0.7 0.13 184.7) 65%,
-      var(--brand) 100%
+      #10b981 0%,
+      #34d399 35%,
+      #14b8a6 65%,
+      #10b981 100%
     );
-    background-size: 200% 100%;
+    background-size: 200% auto;
     -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
     animation: text-gradient-pan 8s linear infinite;
