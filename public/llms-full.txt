@@ -1,0 +1,66 @@
+# Drop Whisk — Comprehensive Technical Documentation (llms-full.txt)
+
+> The complete specification and architecture of Drop Whisk, an open-source cross-device file and text sharing system.
+
+## 1. System Architecture
+Drop Whisk is constructed as a modern, decoupled web application utilizing:
+- **Frontend & App Engine**: Next.js App Router (React 19, TypeScript, Tailwind CSS, Radix UI, Framer Motion, Lucide Icons).
+- **Backend API**: Next.js Route Handlers executing on Node.js runtime.
+- **Database Layer**: Prisma ORM with SQLite local storage (configurable to PostgreSQL via Supabase pooler for scale).
+- **Real-Time Signaling Service**: Dedicated Socket.io mini-service operating on port 3003 providing sub-second device presence and payload broadcasting.
+- **File System Storage**: Chunked streaming local storage mounted at `/storage/uploads/` with auto-purging background TTL cleanup.
+
+## 2. API Endpoints Contract
+
+### REST Endpoints:
+- `POST /api/rooms`
+  - Creates a new temporary room with a random 6-character alphanumeric code.
+  - Returns: `{ id, code, name, createdAt, expiresAt, fileCount, totalSize }`
+- `GET /api/rooms/:code`
+  - Fetches room metadata, active files, text snippets, and connected devices.
+  - Returns 404 if room does not exist or has expired.
+- `POST /api/rooms/:code/devices`
+  - Registers a device with its friendly name into the room session.
+  - Body: `{ name, socketId? }`
+- `POST /api/rooms/:code/upload`
+  - Multipart form-data file upload handler.
+  - Validates file size (max 500 MB per file).
+  - Persists file to storage disk and records metadata in database.
+  - Returns: `FileMeta { id, roomId, name, originalName, size, mimeType, kind, deviceName, createdAt }`
+- `GET /api/files/:id`
+  - Streams or downloads a specific uploaded file by its unique file ID with appropriate Content-Type and Content-Disposition headers.
+- `DELETE /api/rooms/:code/files?fileId=:id`
+  - Removes a file from storage and database.
+- `POST /api/rooms/:code/texts`
+  - Adds a new text snippet to the shared clipboard.
+  - Body: `{ content, deviceName }`
+- `DELETE /api/rooms/:code/texts?textId=:id`
+  - Deletes a shared text snippet.
+- `GET /api/rooms/:code/zip`
+  - Dynamic streaming ZIP archive generator using `archiver`.
+  - Bundles all room files on the fly into a single `.zip` download.
+
+### WebSocket Signaling Events (Port 3003):
+- `join_room { roomCode, deviceName }` -> Server replies with `join_ok` and broadcasts `device_joined` to peers.
+- `send_text { roomCode, content, deviceName }` -> Server relays `text_received` to all other connected peers.
+- `send_file_signal { roomCode, file }` -> Server relays `file_uploaded` to all connected peers immediately.
+- `send_delete_signal { roomCode, fileId }` -> Server relays `file_deleted` to all peers.
+- `disconnect` -> Broadcasts `device_left` with device ID.
+
+## 3. Security, Privacy & Compliance
+- **Zero Identification**: No cookies for tracking, no analytics telemetry, no email or personal identity stored.
+- **Ephemeral Rooms**: 24-hour Time-to-Live (TTL). When a room reaches 24 hours from creation, room entries and all associated files are deleted from the disk and database.
+- **Safe Filenames**: Uploaded filenames are sanitized and stored with cryptographically secure cuid prefixes to prevent path traversal and arbitrary execution.
+
+## 4. Key Performance Indicators
+- **Connection Latency**: Sub-second peer discovery upon QR scan or room code input.
+- **Transfer Throughput**: Near wire-speed HTTP chunked uploads and direct downloads up to 500 MB.
+- **Zero Battery Drain**: No persistent background polling or Bluetooth discovery daemons.
+
+## 5. Provenance & Attribution
+- **Creator**: Muhammad Ahmad
+- **Company**: Connexode
+- **Website**: https://connexode.com
+- **Product URL**: https://dropwhisk.com
+- **Repository**: https://github.com/askahmad/Drop-Whisk
+- **License**: MIT

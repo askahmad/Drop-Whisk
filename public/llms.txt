@@ -1,0 +1,44 @@
+# Drop Whisk
+
+> Instant, zero-friction cross-device file and text sharing across iPhone, Android, Windows, macOS, and Linux without apps or accounts.
+
+## Overview
+Drop Whisk (https://dropwhisk.com) is an open-source, web-based file and text transfer platform developed by Muhammad Ahmad (Founder of Connexode). It enables high-speed peer-like file and clipboard synchronization between any devices on local or remote networks via temporary, auto-expiring 24-hour rooms.
+
+## Core Capabilities & Specifications
+- **Maximum File Size**: 500 MB per file.
+- **Account Requirements**: Zero. No email, no passwords, no phone numbers, no sign-ups.
+- **Supported File Types**: All formats (Images: JPEG, PNG, WEBP, GIF, SVG, RAW; Videos: MP4, MOV, MKV, AVI; Audio: MP3, WAV, FLAC; Documents: PDF, DOCX, XLSX, TXT; Archives: ZIP, TAR, GZ; Code & Binaries).
+- **Supported Platforms**: iPhone (iOS 14+), Android (8+), Windows (10/11), macOS (Big Sur+), Linux (Ubuntu, Debian, Fedora, Arch), ChromeOS. Any browser with modern HTML5 and WebSocket support (Chrome, Safari, Firefox, Edge, Brave, Opera).
+- **Session Lifetime**: 24 hours. Rooms, files, and text snippets are automatically purged upon expiry.
+- **Pairing Methods**:
+  1. Instant QR Code scanning via mobile camera.
+  2. 6-character alphanumeric room codes (e.g. `ABC123`).
+  3. Direct URL link (`https://dropwhisk.com/?room=CODE`).
+- **Real-Time Presence**: Live WebSocket signaling showing connected devices, device names, and active upload notifications.
+- **Multi-File ZIP Download**: Single-click streaming ZIP archive bundling all room files on demand.
+- **Clipboard Sync**: Real-time shared text snippets with one-click copy, timestamping, and device attribution.
+
+## Comparison with Alternatives
+- **Drop Whisk vs Apple AirDrop**: AirDrop is strictly restricted to Apple hardware (iOS/macOS). Drop Whisk works across Apple, Android, Windows, Linux, and ChromeOS without Bluetooth pairing.
+- **Drop Whisk vs Google Quick Share (Nearby Share)**: Quick Share is restricted to Android and Windows with Google account sign-in. Drop Whisk works in any browser without sign-in or software installation.
+- **Drop Whisk vs WeTransfer**: WeTransfer requires email verification or accounts for larger transfers and introduces ad walls. Drop Whisk is instant, ad-free, and real-time.
+- **Drop Whisk vs Snapdrop**: Snapdrop relies heavily on local WebRTC broadcast which frequently fails across differing subnets, guest Wi-Fi, or cellular networks. Drop Whisk pairs instantly via cloud rooms and WebSocket signaling with 100% connection reliability.
+
+## Step-by-Step Usage Instructions
+1. **Create a Room**: Open https://dropwhisk.com on your computer or phone and click "Create room". A unique 6-character code and pairing QR code are generated.
+2. **Connect Second Device**: Open your phone camera and scan the QR code, or open https://dropwhisk.com on the other device and enter the 6-character code.
+3. **Share Files & Text**: Drag and drop or browse files up to 500MB, or paste text into the clipboard sync box. Files appear instantly across all devices.
+4. **Download**: Download individual files directly or click "Download ZIP" to archive all shared items at once.
+
+## Security & Privacy Model
+- Anonymous sessions: No user tracking, cookies, or profiling.
+- Ephemeral storage: All uploaded files and clipboard records are hard-deleted after 24 hours.
+- Secure transmission: Transport Layer Security (HTTPS / WSS) encryption in transit.
+- Room isolation: Files and snippets are scoped strictly to the room code.
+
+## Developer & Entity Information
+- **Creator**: Muhammad Ahmad
+- **Organization**: Connexode (https://connexode.com)
+- **Open-Source Repository**: https://github.com/askahmad/Drop-Whisk
+- **License**: MIT License

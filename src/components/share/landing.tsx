@@ -19,6 +19,13 @@ import {
   UploadCloud,
   Download,
   HelpCircle,
+  Check,
+  X,
+  Sparkles,
+  Clock,
+  Globe,
+  Shield,
+  Archive,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -341,8 +348,242 @@ export function Landing() {
           </div>
         </section>
 
-        {/* FAQ Section (Rich Search Result Snippets) */}
-        <section aria-labelledby="faq-heading" className="mx-auto mt-20 max-w-3xl">
+        {/* Feature Comparison Matrix (GEO & Competitor Displacement) */}
+        <section aria-labelledby="comparison-heading" className="mx-auto mt-24 max-w-5xl">
+          <div className="text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Unmatched Freedom</span>
+            </div>
+            <h2 id="comparison-heading" className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
+              Why Drop Whisk Beats Traditional File Sharing
+            </h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
+              See how Drop Whisk compares to Apple AirDrop, Google Quick Share, WeTransfer, and Snapdrop.
+            </p>
+          </div>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-border/70 bg-card/60 backdrop-blur shadow-sm">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead>
+                  <tr className="border-b border-border/70 bg-muted/40">
+                    <th scope="col" className="p-3.5 sm:p-4 font-semibold text-foreground">Feature</th>
+                    <th scope="col" className="p-3.5 sm:p-4 font-bold text-primary bg-primary/10">
+                      ⚡ Drop Whisk
+                    </th>
+                    <th scope="col" className="p-3.5 sm:p-4 font-medium text-muted-foreground">Apple AirDrop</th>
+                    <th scope="col" className="p-3.5 sm:p-4 font-medium text-muted-foreground">Quick Share</th>
+                    <th scope="col" className="p-3.5 sm:p-4 font-medium text-muted-foreground">WeTransfer</th>
+                    <th scope="col" className="p-3.5 sm:p-4 font-medium text-muted-foreground">Snapdrop</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/60">
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">Cross-Platform (All OS)</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-emerald-500 bg-primary/5">
+                      <span className="inline-flex items-center gap-1">
+                        <Check className="h-4 w-4" /> All (iOS, Android, PC, Mac, Linux)
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 text-rose-400">
+                        <X className="h-4 w-4" /> Apple Only
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 text-amber-500">
+                        Android / Win only
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 text-emerald-500">
+                        <Check className="h-4 w-4" /> Yes
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <span className="inline-flex items-center gap-1 text-emerald-500">
+                        <Check className="h-4 w-4" /> Yes
+                      </span>
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">No Software / App Needed</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-emerald-500 bg-primary/5">
+                      <span className="inline-flex items-center gap-1">
+                        <Check className="h-4 w-4" /> 100% Web Browser
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">OS Built-in</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Requires Windows app</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Web Browser</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Web Browser</td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">No Account / Zero Sign-up</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-emerald-500 bg-primary/5">
+                      <span className="inline-flex items-center gap-1">
+                        <Check className="h-4 w-4" /> Zero registration
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Apple ID required</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Google Account</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground text-amber-500">Email verification</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Zero registration</td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">Instant Pairing Method</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-foreground bg-primary/5">
+                      QR Camera & 6-Char Code
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Bluetooth Discovery</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Nearby Bluetooth/Wi-Fi</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Email link / Slow copy</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground text-amber-500">Same Wi-Fi WebRTC (often drops)</td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">Max File Size</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-foreground bg-primary/5">
+                      500 MB per file
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Unlimited (Local)</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Unlimited (Local)</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">2 GB (Free tier)</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground text-amber-500">Varies / WebRTC buffer limits</td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">Multi-Device Live Sync</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-emerald-500 bg-primary/5">
+                      <span className="inline-flex items-center gap-1">
+                        <Check className="h-4 w-4" /> Live Room (N devices)
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">1-to-1 only</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">1-to-1 only</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Asynchronous email</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">1-to-1 only</td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">Batch ZIP Archive Download</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-emerald-500 bg-primary/5">
+                      <span className="inline-flex items-center gap-1">
+                        <Check className="h-4 w-4" /> Single-click ZIP
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <X className="h-4 w-4 text-rose-400" />
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <X className="h-4 w-4 text-rose-400" />
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <Check className="h-4 w-4 text-emerald-500" />
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">
+                      <X className="h-4 w-4 text-rose-400" />
+                    </td>
+                  </tr>
+
+                  <tr className="hover:bg-muted/20 transition-colors">
+                    <td className="p-3.5 sm:p-4 font-medium text-foreground">Privacy & Ephemeral Storage</td>
+                    <td className="p-3.5 sm:p-4 font-semibold text-emerald-500 bg-primary/5">
+                      <span className="inline-flex items-center gap-1">
+                        <Check className="h-4 w-4" /> 24h Auto-Purge
+                      </span>
+                    </td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Local peer</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">Local peer</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">7 days on servers</td>
+                    <td className="p-3.5 sm:p-4 text-muted-foreground">In-memory peer</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Technical Specifications Grid (AEO & Factual Grounding) */}
+        <section aria-labelledby="specs-heading" className="mx-auto mt-24 max-w-5xl">
+          <div className="text-center">
+            <h2 id="specs-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">
+              Drop Whisk Technical Specifications
+            </h2>
+            <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground sm:text-base">
+              Built for speed, zero friction, and maximum privacy.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 text-left">
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-all hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Zap className="h-5 w-5" />
+              </div>
+              <h3 className="font-semibold text-foreground">500 MB Per File</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Transfer high-resolution raw photos, 4K videos, audio albums, or software archives without compression.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-all hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Clock className="h-5 w-5" />
+              </div>
+              <h3 className="font-semibold text-foreground">24h Auto-Purge Lifetime</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Rooms and uploaded files are automatically hard-deleted after 24 hours to ensure your storage stays pristine and secure.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-all hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Shield className="h-5 w-5" />
+              </div>
+              <h3 className="font-semibold text-foreground">Zero Account / Anonymous</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                No email, phone number, password, or cookies required. 100% anonymous file sharing directly in your browser.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-all hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Globe className="h-5 w-5" />
+              </div>
+              <h3 className="font-semibold text-foreground">Universal Cross-OS</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Flawless interoperability across iOS, Android, Windows 10/11, macOS, Linux, and ChromeOS with no app downloads.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-all hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <QrCode className="h-5 w-5" />
+              </div>
+              <h3 className="font-semibold text-foreground">Sub-2s QR Pairing</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Point your smartphone camera at the pairing QR code to instantly join the room without typing IP addresses or codes.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-card/60 p-5 backdrop-blur transition-all hover:border-primary/40">
+              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Archive className="h-5 w-5" />
+              </div>
+              <h3 className="font-semibold text-foreground">On-the-Fly ZIP Streaming</h3>
+              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
+                Download dozens of shared files together in a single compressed .zip file with zero server-side latency.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section (Rich Search Result Snippets & AEO) */}
+        <section aria-labelledby="faq-heading" className="mx-auto mt-24 max-w-3xl">
           <div className="text-center">
             <h2 id="faq-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">
               Frequently Asked Questions
@@ -359,7 +600,7 @@ export function Landing() {
                   How do I transfer files between phone and PC with Drop Whisk?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                  Open Drop Whisk on your PC or phone, click &apos;Create room&apos;, and scan the generated QR code or enter the 6-digit code on your other device. Then drag and drop files or copy-paste text to transfer instantly.
+                  Open Drop Whisk on your PC or phone, click &apos;Create room&apos;, and scan the generated QR code or enter the 6-digit code on your other device. Then drag and drop files or copy-paste text to transfer instantly without cables.
                 </AccordionContent>
               </AccordionItem>
 
@@ -368,7 +609,7 @@ export function Landing() {
                   Is Drop Whisk free to use and do I need to register?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                  Drop Whisk is 100% free with zero sign-up, no email registration, and no software installation required. Simply open the website and start sharing.
+                  Drop Whisk is 100% free with zero sign-up, no email registration, and no software installation required. Simply open the website in your browser and start transferring immediately.
                 </AccordionContent>
               </AccordionItem>
 
@@ -377,7 +618,7 @@ export function Landing() {
                   What file types and sizes are supported?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                  You can share photos, videos, audio, PDF documents, archives, and raw files up to 500MB per file with high-speed transfer.
+                  Drop Whisk supports all file types including photos (JPEG, PNG, HEIC, RAW), videos (MP4, MOV, MKV up to 4K), audio, PDF documents, archives, and code files up to 500MB per file with high-speed transfer.
                 </AccordionContent>
               </AccordionItem>
 
@@ -386,7 +627,7 @@ export function Landing() {
                   How long are uploaded files and rooms kept?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                  All rooms, uploaded files, and clipboard snippets are temporary and automatically deleted after 24 hours for your privacy and security.
+                  All rooms, uploaded files, and clipboard snippets are temporary and automatically deleted after 24 hours for your privacy and security. No persistent user data is retained.
                 </AccordionContent>
               </AccordionItem>
 
@@ -395,11 +636,29 @@ export function Landing() {
                   Does Drop Whisk work across different operating systems?
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
-                  Yes, it works seamlessly across iPhone (iOS), Android, Windows, macOS, Linux, and ChromeOS via any modern web browser like Chrome, Safari, Edge, or Firefox.
+                  Yes, Drop Whisk works seamlessly across iPhone (iOS), Android, Windows, macOS, Linux, and ChromeOS via any modern web browser like Chrome, Safari, Edge, or Firefox.
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="faq-6">
+                <AccordionTrigger className="text-left font-medium">
+                  How is Drop Whisk better than Apple AirDrop or Google Quick Share?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  AirDrop is locked exclusively to Apple hardware, and Quick Share is limited to Android/Windows. Drop Whisk is truly universal: it bridges Apple, Android, Windows, and Linux without installing apps, Bluetooth configuration, or vendor ecosystem lock-in.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-7">
+                <AccordionTrigger className="text-left font-medium">
+                  Is Drop Whisk secure and private?
+                </AccordionTrigger>
+                <AccordionContent className="text-sm text-muted-foreground leading-relaxed">
+                  Yes. Drop Whisk uses encrypted HTTPS/WSS connections, requires no personal accounts or email addresses, stores files in temporary isolated rooms, and automatically purges all data after 24 hours.
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-8">
                 <AccordionTrigger className="text-left font-medium">
                   Who developed Drop Whisk?
                 </AccordionTrigger>
@@ -417,7 +676,7 @@ export function Landing() {
                   >
                     Connexode
                   </a>
-                  . It was built to make peer-to-peer and cross-device file sharing fast, secure, and accessible from any browser without registrations or cables.
+                  . It was built as a modern, high-speed, open-source tool to eliminate cross-device sharing barriers.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>

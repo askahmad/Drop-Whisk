@@ -24,6 +24,7 @@ node_modules
 .DS_Store
 *.pem
 *.db
+.vscode/
 
 # debug
 npm-debug.log*
